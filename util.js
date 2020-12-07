@@ -63,3 +63,43 @@ export function createTexture(gl) {
     // gl.generateMipmap(gl.TEXTURE_2D);
     return texture;
 }
+
+export function createProjectionMat(l, r, t, b, n, f) {
+    return [
+        2 / (r - l), 0, 0, 0,
+        0, 2 / (t - b), 0, 0,
+        0, 0, 2 / (f - n), 0,
+        -(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n), 1
+    ]
+}
+
+
+export function createTranslateMat(tx, ty) {
+    return [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        tx, ty, 0, 1
+    ]
+}
+
+export function createRotateMat(rotate) {
+    rotate = rotate * Math.PI / 180;
+    const cos = Math.cos(rotate);
+    const sin = Math.sin(rotate);
+    return [
+        cos, sin, 0, 0,
+        -sin, cos, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    ]
+}
+
+export function createScaleMat(sx, sy) {
+    return [
+        sx, 0, 0, 0,
+        0, sy, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    ]
+}
